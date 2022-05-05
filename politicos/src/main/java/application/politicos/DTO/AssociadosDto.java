@@ -1,22 +1,18 @@
 package application.politicos.DTO;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 
 import application.politicos.model.Associados;
-import application.politicos.model.Partidos;
 import application.politicos.repository.AssociadoRepository;
-import application.politicos.repository.PartidoRepository;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.ToString.Exclude;
 
 
 
@@ -32,25 +28,21 @@ public class AssociadosDto {
 	private String nome;
 	private String cargo;
 	private String sexo;
-	private LocalDateTime dataNascimento;	
-	private String nomePartido;
+	private LocalDate dataNascimento;	
+	
 	
 	public AssociadosDto(Associados associados) {
 		this.id = associados.getIdAssociado();
 		this.nome = associados.getNome();
 		this.cargo = associados.getCargo();
 		this.sexo = associados.getSexo();
+		this.dataNascimento =associados.getDataNascimento();
 		
+	
 	}
 	
-	public AssociadosDto(Associados associados, Partidos partidos) {
-		this.id = associados.getIdAssociado();
-		this.nome = associados.getNome();
-		this.cargo = associados.getCargo();
-		this.sexo = associados.getSexo();
-		
-		
-	}
+
+	
 	public List<Associados> listarNomeOrdem(){
 		return associadoRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 		

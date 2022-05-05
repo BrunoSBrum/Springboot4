@@ -1,7 +1,7 @@
 package application.politicos.DTO;
 
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import application.politicos.model.Partidos;
@@ -16,7 +16,7 @@ public class PartidoDto {
 	private String nome;
 	private String sigla;
 	private String ideologia;
-	private LocalDateTime dataFundacao;
+	private LocalDate dataFundacao;
 	
 	public PartidoDto(Partidos partido) {
 		this.id = partido.getId();

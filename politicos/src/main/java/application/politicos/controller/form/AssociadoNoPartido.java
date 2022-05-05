@@ -1,5 +1,7 @@
 package application.politicos.controller.form;
 
+import java.util.Optional;
+
 import application.politicos.model.Associados;
 import application.politicos.model.Partidos;
 import application.politicos.repository.AssociadoRepository;
@@ -17,18 +19,16 @@ public class AssociadoNoPartido {
 
 	@SuppressWarnings("deprecation")
 	public Associados vincularPartido(PartidoRepository pRepository, AssociadoRepository aRepository) {
-		System.out.println(idAssociado);
-		
+			
 		Associados associados =  aRepository.getOne(idAssociado);
 		Partidos partidos = pRepository.getOne(idPartido);
-		
+			
 		associados.setPartidos(partidos);
 		return associados;
 		
 		
 }
-	
-	
-	
+
+
 	
 }

@@ -1,6 +1,6 @@
 package application.politicos.controller.form;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import application.politicos.model.Partidos;
 import application.politicos.repository.PartidoRepository;
@@ -15,10 +15,12 @@ public class AtualizacaoPartidosForm {
 	private String nome;
 	private String sigla;
 	private String ideologia;
-	private LocalDateTime dataFundacao;
+	private LocalDate dataFundacao;
 
 	
 	public Partidos atualizar(Long id, PartidoRepository partidoRepository) {
+		
+		@SuppressWarnings("deprecation")
 		Partidos partidos = partidoRepository.getOne(id);
 		partidos.setNome(this.nome);
 		partidos.setSigla(this.sigla);

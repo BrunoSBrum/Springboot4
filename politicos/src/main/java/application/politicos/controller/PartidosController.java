@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
+import application.politicos.DTO.AssociadoNoPartidoDto;
 import application.politicos.DTO.PartidoDto;
 import application.politicos.controller.form.AtualizacaoPartidosForm;
 import application.politicos.model.Partidos;
@@ -51,15 +52,21 @@ public class PartidosController {
 	 
 	@GetMapping("/{id}")
 	public PartidoDto partidoEspecifico(@PathVariable Long id) {
+		
+		@SuppressWarnings("deprecation")
 		Partidos partidos = partidoRepository.getOne(id);
 		return new PartidoDto(partidos);
 	}
 	
-	@GetMapping("/associados")
-	public List<Partidos> listarAssociados() {
-		return partidoRepository.findAll();
+	//Listar todos associdados daquele partido
+	
+	@GetMapping("/{id}/associados")
+	public ResponseEntity<List<AssociadoNoPartidoDto>> listar(@PathVariable Long id) {
 		
 		
+		
+		
+		return ResponseEntity.ok(null);
 	}
 	
 	//Cadastrar partido

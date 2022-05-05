@@ -1,6 +1,6 @@
 package application.politicos.controller.form;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -19,7 +19,7 @@ public class AssociadosForm {
 	private String nome;
 	private String cargo;
 	private String sexo;
-	private LocalDateTime dataNascimento;
+	private LocalDate dataNascimento;
 	@ManyToOne@JoinColumn(name = "nomePartido")
 	private String nomePartido;
 	

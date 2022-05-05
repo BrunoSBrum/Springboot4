@@ -2,13 +2,10 @@ package application.politicos.repository;
 
 import org.springframework.stereotype.Repository;
 
-import application.politicos.DTO.PartidoDto;
-import application.politicos.controller.form.PartidoForm;
 import application.politicos.model.Partidos;
 
 import java.util.List;
 
-import javax.validation.Valid;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

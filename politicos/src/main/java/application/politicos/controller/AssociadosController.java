@@ -4,7 +4,6 @@ package application.politicos.controller;
 import java.net.URI;
 
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -21,16 +20,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import application.politicos.DTO.AssociadosDto;
+import application.politicos.DTO.AssociadosEPartidoDto;
 import application.politicos.controller.form.AssociadoNoPartido;
 import application.politicos.controller.form.AssociadosForm;
 import application.politicos.controller.form.AtualizacaoAssociadosForm;
 import application.politicos.model.Associados;
+import application.politicos.model.Partidos;
 import application.politicos.repository.AssociadoRepository;
 import application.politicos.repository.PartidoRepository;
 
@@ -67,6 +66,8 @@ public class AssociadosController {
 		//Listar por ID especifico
 		@GetMapping("/{id}")
 		public AssociadosDto itemEspecifico(@PathVariable Long id) {
+			
+			@SuppressWarnings("deprecation")
 			Associados associados = associadoRepository.getOne(id);
 			return new AssociadosDto(associados);
 		}
@@ -89,11 +90,11 @@ public class AssociadosController {
 		//Registrar um partido no associado
 		@PostMapping("/partidos")
 		@Transactional
-		public ResponseEntity<AssociadosDto> cadastrarPartidoNoAssociado(@RequestBody AssociadoNoPartido form){
+		public ResponseEntity<AssociadosEPartidoDto> cadastrarPartidoNoAssociado(@RequestBody AssociadoNoPartido form){
 			
 			Associados associados = form.vincularPartido(partidoRepository, associadoRepository);
 			associadoRepository.save(associados);
-			return ResponseEntity.ok(new AssociadosDto(associados));
+			return ResponseEntity.ok(new AssociadosEPartidoDto(associados));
 			
 		
 		}
@@ -118,5 +119,22 @@ public class AssociadosController {
 			return ResponseEntity.ok().build();
 		}
 		
+		//Desvincular um partido de um associado
+		
+		@DeleteMapping("/{idAssociado}/partidos/{idPartido}")
+		@Transactional
+		public ResponseEntity<?> removerPartido(@PathVariable Long idAssociado, @PathVariable Long idPartido){
+			System.out.println(idAssociado);
+			System.out.println(idPartido);
+			
+			Associados associados = associadoRepository.findById(idAssociado).get();
+			Partidos partidos = partidoRepository.findById(idPartido).get();
+			System.out.println("------");
+			System.out.println(partidos);
+			partidos.getAssociados().remove(associados);
+			return ResponseEntity.noContent().build();
+		
+		
+		}
 		
 }

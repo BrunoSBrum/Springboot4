@@ -1,6 +1,6 @@
 package application.politicos.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -45,10 +45,18 @@ public class Associados {
 	@Column(name = "sexo")
 	private String sexo;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
+	@Column(name = "data_nascimento")
+	private LocalDate dataNascimento;
+	
 	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
 			CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "partidos_id")
 	private Partidos partidos;
+	
+	
+	
+	
 	
 	public Associados() {
 		
@@ -57,7 +65,7 @@ public class Associados {
 	
 
 	public Associados(@NotNull @NotEmpty String nome, @NotEmpty @NotNull String cargo, @NotEmpty @NotNull String sexo,
-			LocalDateTime dataNascimento) {
+			LocalDate dataNascimento) {
 		this.nome = nome;
 		this.cargo = cargo;
 		this.sexo = sexo;
@@ -67,7 +75,7 @@ public class Associados {
 
 
 	public Associados(@NotNull @NotEmpty String nome, @NotEmpty @NotNull String cargo,
-			@NotEmpty @NotNull String sexo,  LocalDateTime dataNascimento, Partidos partido) {
+			@NotEmpty @NotNull String sexo,  LocalDate dataNascimento, Partidos partido) {
 		this.nome = nome;
 		this.cargo = cargo;
 		this.sexo = sexo;
@@ -79,8 +87,7 @@ public class Associados {
 	}
 
 
-	@JsonFormat(pattern = "dd/MM/yyyy")
-	private LocalDateTime dataNascimento;
+	
 
 	
 
