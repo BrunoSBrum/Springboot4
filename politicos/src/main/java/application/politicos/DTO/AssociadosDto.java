@@ -23,7 +23,7 @@ public class AssociadosDto {
 	@Autowired @Setter(value = AccessLevel.NONE) @Getter(value = AccessLevel.NONE)
 	private AssociadoRepository associadoRepository;
 	
-	
+		
 	private Long id;
 	private String nome;
 	private String cargo;
@@ -36,7 +36,7 @@ public class AssociadosDto {
 		this.nome = associados.getNome();
 		this.cargo = associados.getCargo();
 		this.sexo = associados.getSexo();
-		this.dataNascimento =associados.getDataNascimento();
+		this.dataNascimento = associados.getDataNascimento();
 		
 	
 	}

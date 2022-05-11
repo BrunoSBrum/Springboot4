@@ -55,9 +55,6 @@ public class Associados {
 	private Partidos partidos;
 	
 	
-	
-	
-	
 	public Associados() {
 		
 	}
@@ -83,12 +80,20 @@ public class Associados {
 		this.partidos = partido;
 	
 	
+	}
+
+
+
+	public Associados(Long idAssociado,@NotNull @NotEmpty String nome, @NotEmpty @NotNull String cargo,
+			@NotEmpty @NotNull String sexo,  LocalDate dataNascimento) {
+		this.nome = nome;
+		this.cargo = cargo;
+		this.sexo = sexo;
+		this.dataNascimento = dataNascimento;
+		this.idAssociado = idAssociado;
 	
 	}
 
 
-	
-
-	
 
 }

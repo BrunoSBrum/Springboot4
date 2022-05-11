@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = ValidadorDeCargo.class)
 public @interface ApenasAlgunsCargos {
 	
-	String message() default "Somente são permitidos cargos validos, casa não tenha cargo, marque como Nenhum";
+	String message() default "Somente são permitidos cargos validos, caso não tenha cargo, marque como Nenhum";
 	
 	Class<?>[] groups() default {};
 	

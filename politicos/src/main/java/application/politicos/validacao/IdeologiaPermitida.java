@@ -13,7 +13,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = ValidacaoIdeologia.class)
 public @interface IdeologiaPermitida {
 	
-	String message() default "Somente são permitidos cargos validos, casa não tenha cargo, marque como Nenhum";
+	String message() default "Somente é permitido as seguintes ideologias, Esquerda, Centro e Direita";
 	
 	Class<?>[] groups() default {};
 	

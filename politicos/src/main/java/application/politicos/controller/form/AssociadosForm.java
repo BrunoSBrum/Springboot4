@@ -1,5 +1,7 @@
 package application.politicos.controller.form;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 import javax.persistence.JoinColumn;
@@ -23,14 +25,17 @@ public class AssociadosForm {
 	@ManyToOne@JoinColumn(name = "nomePartido")
 	private String nomePartido;
 	
+	SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yy");
 	
-	public Associados converter() {
+	public Associados converter() throws ParseException {
+		
+		
 		
 		return new Associados(nome, cargo, sexo, dataNascimento);
 	}
 
-	public Associados converter(PartidoRepository partidoRepository) {
-		Partidos partido = partidoRepository.findByNome(nomePartido);
+	public Associados converter(PartidoRepository partidoRepository) throws ParseException {
+		Partidos partido = (Partidos) partidoRepository.findByNome(nomePartido);
 		return new Associados(nome, cargo, sexo, dataNascimento, partido);
 	}
 

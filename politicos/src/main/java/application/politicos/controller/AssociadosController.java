@@ -2,8 +2,7 @@ package application.politicos.controller;
 
 
 import java.net.URI;
-
-
+import java.text.ParseException;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -65,7 +64,7 @@ public class AssociadosController {
 	
 		//Listar por ID especifico
 		@GetMapping("/{id}")
-		public AssociadosDto itemEspecifico(@PathVariable Long id) {
+		public AssociadosDto itemEspecifico(@PathVariable Long id) throws ParseException {
 			
 			@SuppressWarnings("deprecation")
 			Associados associados = associadoRepository.getOne(id);
@@ -77,7 +76,7 @@ public class AssociadosController {
 		@PostMapping
 		@Transactional
 		public ResponseEntity<AssociadosDto> cadastrar(@RequestBody @Valid AssociadosForm form
-				, UriComponentsBuilder uriBuilder){
+				, UriComponentsBuilder uriBuilder) throws ParseException{
 			
 			Associados associados = form.converter();
 			associadoRepository.save(associados);
@@ -103,7 +102,7 @@ public class AssociadosController {
 		@PutMapping("/{id}")
 		@Transactional
 		public ResponseEntity<AssociadosDto> atualizar(@PathVariable Long id,
-				@RequestBody @Valid AtualizacaoAssociadosForm form){
+				@RequestBody @Valid AtualizacaoAssociadosForm form) throws ParseException{
 			
 			Associados associados = form.atualizar(id, associadoRepository);
 			
@@ -124,14 +123,16 @@ public class AssociadosController {
 		@DeleteMapping("/{idAssociado}/partidos/{idPartido}")
 		@Transactional
 		public ResponseEntity<?> removerPartido(@PathVariable Long idAssociado, @PathVariable Long idPartido){
+			
 			System.out.println(idAssociado);
 			System.out.println(idPartido);
 			
 			Associados associados = associadoRepository.findById(idAssociado).get();
 			Partidos partidos = partidoRepository.findById(idPartido).get();
-			System.out.println("------");
-			System.out.println(partidos);
+	
 			partidos.getAssociados().remove(associados);
+			System.out.println(associados);
+			System.out.println(partidos);
 			return ResponseEntity.noContent().build();
 		
 		

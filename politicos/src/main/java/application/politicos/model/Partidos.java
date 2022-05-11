@@ -29,17 +29,23 @@ import lombok.ToString;
 @Entity @Getter @Setter @ToString @Table(name="partidos")
 public class Partidos {
 	
+	
+
+
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@NotEmpty @NotNull
+	@NotEmpty(message = "O campo nome é obrigatório") 
+	@NotNull
 	private String nome;
 	
-	@NotEmpty @NotNull
+	@NotEmpty(message = "O campo sigla é obrigatório") 
+	@NotNull
 	private String sigla;
 	
 	@IdeologiaPermitida
-	@NotEmpty @NotNull
+	@NotEmpty(message = "O campo ideologia é obrigatório, Esquerda, Direita ou Centro") 
+	@NotNull
 	private String ideologia;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy")
@@ -69,6 +75,13 @@ public class Partidos {
 		this.sigla = sigla;
 		this.ideologia = ideologia;
 		this.dataFundacao = dataFundacao;
+	}
+
+
+
+	public static Object builder() {
+		
+		return null;
 	}
 
 
